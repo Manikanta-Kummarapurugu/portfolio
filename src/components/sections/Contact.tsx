@@ -20,10 +20,33 @@ export function Contact() {
       .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
       .join("&");
 
+  const isNetlify = () => {
+    const host = window.location.hostname;
+    return !host.includes("localhost") &&
+           !host.includes("replit") &&
+           !host.includes("repl.co") &&
+           !host.includes("127.0.0.1");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
     setError("");
+
+    // On Netlify: submit to Netlify Forms. Anywhere else: open mailto fallback.
+    if (!isNetlify()) {
+      const subject = `Portfolio message from ${form.name}`;
+      const body = `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`;
+      window.open(
+        `mailto:kmanikanta4321@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+        "_blank"
+      );
+      setSending(false);
+      setSubmitted(true);
+      setForm({ name: "", email: "", message: "" });
+      return;
+    }
+
     try {
       const res = await fetch("/", {
         method: "POST",
