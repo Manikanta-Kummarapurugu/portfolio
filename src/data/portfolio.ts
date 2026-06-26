@@ -172,8 +172,8 @@ export const PORTFOLIO_DATA = {
       stack: ["React Native", "PHP", "MySQL", "REST API", "iPage Hosting"],
       description: "Community public safety app for KrimeWatch Foundation Inc. Device-based access via unique mobile device ID — no traditional login required. Features incident reporting (video/photo/text), local crime & safety search, neighborhood monitoring & alerts, emergency call facilitation, and missing persons reports.",
       links: [
-        { label: "App Store", url: "#" },
-        { label: "Play Store", url: "#" }
+        { label: "App Store", url: "https://apps.apple.com/us/app/krimescene/id6737813493" },
+        { label: "Play Store", url: "https://play.google.com/store/apps/details?id=acs.com.KrimeScene" }
       ]
     },
     {
@@ -183,8 +183,7 @@ export const PORTFOLIO_DATA = {
       stack: ["React Native", "PHP", "MySQL", "iPage Hosting"],
       description: "Community video-sharing and safety monitoring platform. Neighborhood safety alerts, community monitoring, emergency call facilitation, user registration with name and email, and email-based push notification system.",
       links: [
-        { label: "App Store", url: "#" },
-        { label: "Play Store", url: "#" }
+        { label: "Play Store", url: "https://play.google.com/store/apps/details?id=acs.com.krimewatch" }
       ]
     },
     {
@@ -194,8 +193,7 @@ export const PORTFOLIO_DATA = {
       stack: ["React Native", "PHP", "MySQL", "2FA", "iPage Hosting"],
       description: "Advanced safety monitoring app with a dedicated Monitor Screen streaming curated alert media (video, images, geolocation data) from the KrimeWatch volunteer control room. Saved Alerts bookmarking, email-based 2FA, and full account lifecycle with 30-day deletion window.",
       links: [
-        { label: "App Store", url: "#" },
-        { label: "Play Store", url: "#" }
+        { label: "Play Store", url: "https://play.google.com/store/apps/details?id=kfi.com.KrimeMonitor" }
       ]
     },
     {
@@ -205,8 +203,7 @@ export const PORTFOLIO_DATA = {
       stack: ["React Native", "Google Maps API", "Google Authenticator", "iPage Hosting"],
       description: "Restricted-access volunteer coordination app for authorized KrimeWatch Action Team members. Incident workflow management, in-app GPS navigation, Google Maps integration, in-app media capture, action documentation, and Google Authenticator 2FA with administrator-provisioned accounts.",
       links: [
-        { label: "App Store", url: "#" },
-        { label: "Play Store", url: "#" }
+        { label: "Play Store", url: "https://play.google.com/store/apps/details?id=acs.com.krimewatchactionteam" }
       ]
     },
     {
