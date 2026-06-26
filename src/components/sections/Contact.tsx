@@ -12,15 +12,35 @@ export function Contact() {
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const encode = (data: Record<string, string>) =>
+    Object.keys(data)
+      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Contact form submission:", form);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setForm({ name: "", email: "", message: "" });
-    }, 4000);
+    setSending(true);
+    setError("");
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ "form-name": "contact", ...form }),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setError("Something went wrong. Please email me directly.");
+      }
+    } catch {
+      setError("Network error. Please email me directly.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -166,12 +186,16 @@ export function Contact() {
                       className="w-full px-4 py-3 rounded-lg border border-input bg-card text-foreground placeholder:text-muted-foreground/50 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all resize-none"
                     />
                   </div>
+                  {error && (
+                    <p className="text-sm text-red-400 text-center">{error}</p>
+                  )}
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-all duration-200 glow-hover"
+                    disabled={sending}
+                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-all duration-200 glow-hover disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <Send size={16} />
-                    Send Message
+                    <Send size={16} className={sending ? "animate-pulse" : ""} />
+                    {sending ? "Sending…" : "Send Message"}
                   </button>
                 </form>
               )}
